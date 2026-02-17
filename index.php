@@ -101,3 +101,59 @@ $menu = [
                 <?php endforeach; ?>
             </div>
         </div>
+ <script>
+        let cart = [];
+
+        function showCategory(cat) {
+            document.querySelectorAll('.category-set').forEach(el => el.style.display = 'none');
+            document.getElementById('cat-' + cat).style.display = 'block';
+            document.getElementById('cat-title').innerText = cat;
+        }
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateUI();
+        }
+
+        function updateUI() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="cart-row">
+                        <span>${item.name}</span>
+                        <span><b>${item.price}</b> <button onclick="removeItem(${index})">×</button></span>
+                    </div>`;
+            });
+            document.getElementById('grand-total').innerText = 'Ksh ' + total;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateUI();
+        }
+
+        function searchItems() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let cards = document.querySelectorAll('.item-card');
+            cards.forEach(card => {
+                let name = card.querySelector('h4').innerText.toLowerCase();
+                card.style.display = name.includes(input) ? "flex" : "none";
+            });
+        }
+
+        function completeSale() {
+            if(cart.length === 0) return alert("Cart is empty!");
+            alert("Order processed! Printing receipt...");
+            clearCart();
+        }
+    </script>
+</body>
+</html>
