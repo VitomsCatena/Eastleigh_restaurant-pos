@@ -81,6 +81,22 @@ $menu = [
                                 </div>
                             <?php endforeach; ?>
                         </div>
+
+                        <div class="receipt-section">
+            <h3>Current Order</h3>
+            <div id="cart-items">
+                </div>
+            <div class="checkout-box">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="grand-total">Ksh 0</span>
+                </div>
+                <button class="pay-btn" onclick="completeSale()">COMPLETE SALE</button>
+                <button class="clear-btn" onclick="clearCart()">Clear All</button>
+            </div>
+        </div>
+    </div>
+
                     </div>
                 <?php endforeach; ?>
             </div>
