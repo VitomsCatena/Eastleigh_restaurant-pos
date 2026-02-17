@@ -52,3 +52,36 @@ $menu = [
     <title>Eastleigh Kitchen</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<body>
+    <div class="pos-container">
+        <div class="sidebar">
+            <div class="logo">EASTLEIGH KITCHEN</div>
+            <?php foreach (array_keys($menu) as $cat): ?>
+                <button class="cat-btn" onclick="showCategory('<?php echo $cat; ?>')"><?php echo $cat; ?></button>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="main-screen">
+            <div class="header">
+                <h1 id="cat-title">Drinks</h1>
+                <input type="text" id="search" placeholder="Search product..." onkeyup="searchItems()">
+            </div>
+            
+            <div id="items-container">
+                <?php $i = 1; foreach ($menu as $category => $items): ?>
+                    <div class="category-set" id="cat-<?php echo $category; ?>" style="display: <?php echo ($category == 'Drinks') ? 'block' : 'none'; ?>;">
+                        <div class="grid">
+                            <?php foreach ($items as $item): ?>
+                                <div class="item-card" onclick="addToCart('<?php echo $item['name']; ?>', <?php echo $item['price']; ?>)">
+                                    <img src="https://picsum.photos/400/300?random=<?php echo $i++; ?>" alt="Food">
+                                    <div class="info">
+                                        <h4><?php echo $item['name']; ?></h4>
+                                        <p>Ksh <?php echo $item['price']; ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
